@@ -13,6 +13,11 @@ body {
     overflow-x: hidden;
 }
 
+.video{
+    height: 350px;
+    width: 500px;
+}
+
 .switch-mode {
     background-color: #ffffff;
     color: #000000;
@@ -361,10 +366,6 @@ footer {
         flex-direction: column;
     }
     
-    .sidebar {
-        width: 100%;
-    }
-    
     .game-box {
         flex-direction: column;
     }
@@ -408,4 +409,17 @@ footer {
     .footer-columns {
         grid-template-columns: 1fr;
     }
+
+    .video {
+        width: 100%;
+        height: 200px;
+    }
+
+    .screenshot {
+        width: 100%;
+        height: auto;
+        padding-right: 0;
+    }
+
+    
 }

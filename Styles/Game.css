@@ -100,3 +100,11 @@
     color: #38bdf8;
     font-weight: bold;
 }
+
+@media (max-width: 576px){
+    .game-card img{
+        width: 100%;
+        height: auto;
+    }
+    
+}
