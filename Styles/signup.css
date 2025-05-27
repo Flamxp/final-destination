@@ -48,3 +48,38 @@
 .signin-link a:hover {
     text-decoration: underline;
 }
+
+.password-wrapper {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 75%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    cursor: pointer;
+  }
+  
+  .password-wrapper input {
+    padding-right: 35px;
+  }
+
+  @media (max-width: 600px) {
+    .signup-box {
+        padding: 20px;
+    }
+    
+    .signup-box h2 {
+        font-size: 24px;
+    }
+    
+    .form-group input {
+        padding: 8px;
+    }
+    
+    .toggle-password {
+        right: 8px;
+    }
+}

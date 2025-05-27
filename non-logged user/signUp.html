@@ -12,7 +12,7 @@
   <header>
     <div class="container">
       <div class="logo">
-        <a href="main/index.html"><h1>G.A.M.E</h1></a>
+        <a href="/index.html"><h1>G.A.M.E</h1></a>
       </div>
     </div>
   </header>
@@ -21,18 +21,20 @@
     <div class="signup-container">
       <div class="signup-box">
         <h2>Sign Up</h2>
-        <form method="post">
+  <form method="post">
     <p style="color: #38bdf8;">required*</p><br>
   
   <div class="form-group">
     <label for="username">Username*</label><br />
-    <input type="username" id="Username" name="Email" required />
+    <input type="text" id="Username" name="username" required />
   </div>
 
-  <div class="form-group">
+  <div class="form-group password-wrapper">
     <label for="Password">Password*</label><br />
     <input type="password" id="Password" name="Password" required />
+    <i class="fas fa-eye-slash toggle-password" onclick="togglePassword()"></i>
   </div>
+  
 
   <button type="submit" onclick="signup()" class="btn btn-primary">Create Account</button>
 </form>
@@ -45,29 +47,62 @@
   </main>
 
   <script>
-    function validateForm() {
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("Password").value;
 
-      if (!username || !password) {
-        alert("Du har missat något.");
-        return false;
-      }
+function togglePassword() {
+  const passInput = document.getElementById("Password");
+  const icon = document.querySelector(".toggle-password");
 
-      return true;
+  if (passInput.type === "password") {
+    passInput.type = "text";
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+  } else {
+    passInput.type = "password";
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+  }
+}
+
+  function signup(event) {
+    event.preventDefault();
+
+    const username = document.getElementById("Username").value;
+    const password = document.getElementById("Password").value;
+
+    passwordInput.addEventListener("keydown", function(event) {
+    if (event.key === " ") { //om mellanslag trycks ned
+      event.preventDefault(); // förhindra mellanslag för att registrera
+      const start = this.selectionStart; //texten innan mellanslaget
+      const end = this.selectionEnd; //texten efter mellanslaget
+      const value = this.value; // hela texten i inputfältet
+
+      
+      this.value = value.substring(0, start) + "_" + value.substring(end);
+
+      
+      this.setSelectionRange(start + 1, start + 1);
+    }
+  });
+
+    if (!username || !password) {
+      alert("Du har missat något.");
+      return false;
     }
 
-    function signup() {
-      const username = document.getElementById("Username").value;
-      const password = document.getElementById("Password").value;
+    let usersDB = JSON.parse(localStorage.getItem("usersDB")) || [];
 
-      if (validateForm()) {
-        alert("Account created successfully!");
-        localStorage.setItem("username", username);
-        window.location.href = "signIn.html";
-        return true;
-      }
+    if (usersDB.some(user => user[0] === username)) {
+      alert("Username already exists.");
+      return;
     }
+
+    usersDB.push([username, password]);
+    localStorage.setItem("usersDB", JSON.stringify(usersDB));
+
+    alert("Account created successfully!");
+    window.location.href = "signIn.html";
+  }
+
   </script>
 
   <footer>
